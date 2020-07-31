@@ -22,6 +22,6 @@ type IncomingRequest struct {
 	Header Header
 }
 
-func newIncomingRequest(req *http.Request) IncomingRequest {
-	return IncomingRequest{req: req, Header: newHeader(req.Header)}
+func newIncomingRequest(req *http.Request) *IncomingRequest {
+	return &IncomingRequest{req: req, Header: newHeader(req.Header)}
 }
