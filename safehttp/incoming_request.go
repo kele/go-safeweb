@@ -14,14 +14,25 @@
 
 package safehttp
 
-import "net/http"
+import (
+	"crypto/tls"
+	"net/http"
+	"net/url"
+)
 
 // IncomingRequest TODO
 type IncomingRequest struct {
 	req    *http.Request
 	Header Header
+	TLS    *tls.ConnectionState
+	URL    *url.URL
 }
 
 func newIncomingRequest(req *http.Request) IncomingRequest {
-	return IncomingRequest{req: req, Header: newHeader(req.Header)}
+	return IncomingRequest{
+		req:    req,
+		Header: newHeader(req.Header),
+		TLS:    req.TLS,
+		URL:    req.URL,
+	}
 }
